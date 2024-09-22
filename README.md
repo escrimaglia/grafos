@@ -1,5 +1,7 @@
 # Algoritmos para resolver problemas de Grafos
 
+![plot](./Figura/Grafo.png)
+
 ## Dijkstra: resolución de problemas de camino mas corto (shortest path)
 
 - El gráfico puede ser de tipo circular o jerárquico (arbol)
