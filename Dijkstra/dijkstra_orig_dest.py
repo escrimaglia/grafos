@@ -62,7 +62,7 @@ class Grafo:
         return camino
 
     # Graficar grafo tipo circular (IA)
-    def graficar_grafo_circular(self, distancia_total: int, camino_resaltado: list = []):
+    def graficar_grafo_circular(self, distancia_total: int, nodo_origen: str, camino_resaltado: list = []) -> None:
         G = nx.DiGraph() if self.dirigido else nx.Graph()
 
         for origen in self.grafo:
@@ -86,6 +86,9 @@ class Grafo:
             camino_edge_labels = {edge: edge_labels[edge] for edge in camino_edges if edge in edge_labels}
             nx.draw_networkx_edge_labels(G, pos, edge_labels=camino_edge_labels, font_color='blue', font_size=12)
 
+        if not nodo_origen in camino_resaltado:
+            nx.draw_networkx_nodes(G, pos, nodelist=[nodo_origen], node_color='yellow', node_size=600)
+
         plt.text(
             0.5, 0.05, f"Menor distancia: {distancia_total}", 
             horizontalalignment='center', verticalalignment='center', 
@@ -97,7 +100,7 @@ class Grafo:
         plt.show()
 
     # Graficar grafo tipo Arbol (IA)
-    def graficar_grafo_arbol(self, distancia_total: int, camino_resaltado: list = []):
+    def graficar_grafo_arbol(self, distancia_total: int, nodo_origen: str, camino_resaltado: list = []) -> None:
         G = nx.DiGraph() if self.dirigido else nx.Graph()
 
         for origen in self.grafo:
@@ -108,8 +111,7 @@ class Grafo:
         pos = graphviz_layout(G, prog='dot')
 
         # Tamaño del gráfico
-        plt.figure(figsize=(13, 8))
-
+        plt.figure(figsize=(15, 10))
         nx.draw(G, pos, with_labels=True, node_size=500, node_color='lightblue', font_size=12, font_weight='bold', edge_color='gray', width=2)
         
         edge_labels = nx.get_edge_attributes(G, 'weight')
@@ -122,6 +124,8 @@ class Grafo:
             camino_edge_labels = {edge: edge_labels[edge] for edge in camino_edges if edge in edge_labels}
             nx.draw_networkx_edge_labels(G, pos, edge_labels=camino_edge_labels, font_color='blue', font_size=12)
 
+        if not nodo_origen in camino_resaltado:
+            nx.draw_networkx_nodes(G, pos, nodelist=[nodo_origen], node_color='yellow', node_size=600)
 
         plt.text(
             0.5, 0.05, f"Menor distancia: {distancia_total}", 
@@ -134,7 +138,7 @@ class Grafo:
         plt.show()
 
 if __name__ == "__main__":
-    dirigido = True 
+    dirigido = True
     tipo_grafico = "arbol"
 
     grafo = Grafo(dirigido)
@@ -161,21 +165,22 @@ if __name__ == "__main__":
     grafo.agregar_arista("SF", "MJ", 312)
     grafo.agregar_arista("SF", "FU", 640)
 
-    nodo_inicial = "RO"
-    nodo_final = "FR"
+    nodo_inicial = "CO"
+    nodo_final = "MJ"
 
     distancia, predecesores = grafo.dijkstra(nodo_inicial, nodo_final)
 
     tipo_grafo = "dirigido" if dirigido else "no dirigido"
+    camino = grafo.reconstruir_camino(predecesores, nodo_final)
+    
     if distancia < float('inf'):
-        camino = grafo.reconstruir_camino(predecesores, nodo_final)
-        print (f"El camino más corto desde {nodo_inicial} hasta {nodo_final} es: {camino}")
-        if tipo_grafico.lower() == "circular":
-            grafo.graficar_grafo_circular(distancia, camino_resaltado=camino)
-        elif tipo_grafico.lower() == "arbol":
-            grafo.graficar_grafo_arbol(distancia, camino_resaltado=camino)
-        else:
-            print ("Tipo de gráfico debe ser Circular o Arbol")
+        print (f"El camino más corto desde {nodo_inicial} hasta {nodo_final} es: {camino}. La distancia es {distancia}")
     else:
         print (f"No hay camino desde el nodo {nodo_inicial} al nodo {nodo_final}")
-        grafo.graficar_grafo(distancia)
+       
+    if tipo_grafico.lower() == "circular":
+        grafo.graficar_grafo_circular(distancia, nodo_inicial, camino_resaltado=camino)
+    elif tipo_grafico.lower() == "arbol":
+        grafo.graficar_grafo_arbol(distancia, nodo_inicial, camino_resaltado=camino)
+    else:
+        print ("Tipo de gráfico debe ser Circular o Arbol")

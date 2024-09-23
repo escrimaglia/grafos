@@ -84,7 +84,7 @@ if __name__ == "__main__":
     grafo.agregar_arista("SF", "MJ", 312)
     grafo.agregar_arista("SF", "FU", 640)
 
-    nodo_inicio = "RO"
+    nodo_inicio = "CO"
 
     msg = "Grafo dirigido:"
     if not dirigido:

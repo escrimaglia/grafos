@@ -4,7 +4,11 @@
 
 ## Dijkstra: resolución de problemas de camino mas corto (shortest path)
 
-- El gráfico puede ser de tipo circular o jerárquico (arbol)
+- El gráfico puede ser de tipo circular o jerárquico (árbol)
+
+- Cuando en el gráfico tipo Jerárquico, se note una superposición de aristas, cambiar a tipo de gráfico circular.
+
+## Código
 
 - dijkstra_orig_to_allnodes.py: resuelve el shortest path entre el nodo original y cada nodo del grafo e imprime el resultado en consola
 
