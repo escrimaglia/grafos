@@ -22,7 +22,7 @@ class Grafo:
             self.grafo[destino].append((origen, costo))
 
     def dijkstra(self, inicio: Any) -> dict[Any,(None, float)]:
-        distancias = {nodo: float('inf') for nodo in self.grafo}
+        distancias = {nodo: float('infinity') for nodo in self.grafo}
         distancias[inicio] = 0
         predecesores = {nodo: None for nodo in self.grafo}
         cola_prioridad = [(0, inicio)]
@@ -95,7 +95,7 @@ if __name__ == "__main__":
     print (f"Tipo de grafo: {msg}")
     print (f"Nodo de inicio: {nodo_inicio}")
     for nodo, distancia in distancias.items():
-        if distancia < float('inf'):
+        if distancia < float('infinity'):
             camino = grafo.reconstruir_camino(predecesores, nodo)
             print (f"La distancia desde el nodo {nodo_inicio} al nodo {nodo} es {distancia}, camino: {camino}")
         else:

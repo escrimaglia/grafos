@@ -26,7 +26,7 @@ class Grafo:
             self.grafo[destino].append((origen, costo))
 
     def dijkstra(self, inicio: Any, final: Any) -> Tuple[float, dict[Any, Any]]:
-        distancias = {nodo: float('inf') for nodo in self.grafo}
+        distancias = {nodo: float('infinity') for nodo in self.grafo}
         distancias[inicio] = 0
         predecesores = {nodo: None for nodo in self.grafo}
         cola_prioridad = [(0, inicio)]
@@ -51,7 +51,7 @@ class Grafo:
                     predecesores[vecino] = nodo_actual
                     heapq.heappush(cola_prioridad, (nueva_distancia, vecino))
 
-        return float('inf'), predecesores
+        return float('infinity'), predecesores
 
     def reconstruir_camino(self, predecesores: dict[Any, Any], nodo_final: Any) -> list:
         camino = []
@@ -111,7 +111,7 @@ class Grafo:
         pos = graphviz_layout(G, prog='dot')
 
         # Tamaño del gráfico
-        plt.figure(figsize=(15, 10))
+        plt.figure(figsize=(13, 8))
         nx.draw(G, pos, with_labels=True, node_size=500, node_color='lightblue', font_size=12, font_weight='bold', edge_color='gray', width=2)
         
         edge_labels = nx.get_edge_attributes(G, 'weight')
@@ -139,7 +139,7 @@ class Grafo:
 
 if __name__ == "__main__":
     dirigido = True
-    tipo_grafico = "arbol"
+    tipo_grafico = "Arbol"
 
     grafo = Grafo(dirigido)
     grafo.agregar_arista("CO", "FR", 565)
@@ -173,7 +173,7 @@ if __name__ == "__main__":
     tipo_grafo = "dirigido" if dirigido else "no dirigido"
     camino = grafo.reconstruir_camino(predecesores, nodo_final)
     
-    if distancia < float('inf'):
+    if distancia < float('infinity'):
         print (f"El camino más corto desde {nodo_inicial} hasta {nodo_final} es: {camino}. La distancia es {distancia}")
     else:
         print (f"No hay camino desde el nodo {nodo_inicial} al nodo {nodo_final}")
