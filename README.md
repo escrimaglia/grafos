@@ -10,6 +10,8 @@
 
 - El grafo puede ser dirigido o no dirigido
 
+- Se deben ingresar las aristas en formato (origen, destina, costo)
+
 ### Código Dijkstra
 
 - dijkstra_orig_to_allnodes.py: resuelve el shortest path entre el nodo original y cada nodo del grafo e imprime el resultado en consola
@@ -24,7 +26,7 @@
 
 ## Kruskal: resolución de problemas de Arbol de Expansión Mínima
 
-- Se deben ingresar las aristas
+- Se deben ingresar las aristas en formato (origen, destina, costo)
 
 ### Código Kruskal
 
